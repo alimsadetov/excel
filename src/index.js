@@ -1,4 +1,3 @@
-import './module.js'
-import './sass/index.sass'
+import './scss/index.scss'
 
-console.log('henlo');
+console.log('Working!')

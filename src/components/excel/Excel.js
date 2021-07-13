@@ -1,21 +1,24 @@
+import {$} from '@core/dom'
+
 export class Excel {
   constructor(selector, options) {
     this.$el = document.querySelector(selector)
     this.components = options.components || []
   }
-  //функция которая создаёт див и в нём контент который берётся с каждой компоненты
-  //дом переменные обозначаются с знака доллара
+
   getRoot() {
-    const $root = document.createElement('div')
+    const $root = $.create('div', 'excel')
 
     this.components.forEach(Component => {
-      const component = new Component()
-      $root.insertAdjacentHTML('beforeend', component.toHTML())
+      const $el = $.create('div', Component.className)
+      const component = new Component($el)
+      $el.innerHTML = component.toHTML()
+      $root.append($el)
     })
 
     return $root
   }
-  //функция которая в апп добавляет полученное в гетрут
+
   render() {
     this.$el.append(this.getRoot())
   }
